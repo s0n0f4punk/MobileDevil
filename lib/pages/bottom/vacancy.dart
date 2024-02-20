@@ -23,7 +23,10 @@ class VacancyPage extends StatelessWidget {
                   )
                 ],
               ),
-              const Text('jgbcfybtlkgbcfybtlkjdlfksdlfkjsldkfjsldkfjsdfsdfssdfsdfsdfsdfsdfsfdfsdfjdlfksdlfkjsldkfjsldkfjsdfsdfssdfsdfsdfsdfsdfsfdfsdf', style: TextStyle(color: Colors.white),),
+              SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: const Text('horhorhohohorhohohohohorrrhohorhorhohohorhohohohohorrrhorhorhohorhorhorhohorrhorhohorhorhorhohor', style: TextStyle(color: Colors.white),),
+                  ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

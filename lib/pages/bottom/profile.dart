@@ -5,8 +5,30 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      child: Text('профиль', style: TextStyle(color: Colors.white)),
+    return Container(
+      child: Column(
+        children: [
+          Card(
+            child: ListTile(
+              title: Container(alignment: Alignment.topLeft,
+              child: const Column(
+                children: [
+                  Text('Фамилиев', style: TextStyle(color: Colors.white),),
+                  Text('Имён', style: TextStyle(color: Colors.white),),
+                  Text('Отчествович', style: TextStyle(color: Colors.white),),
+                ],
+              ),
+              ),
+              subtitle: const Text('+7 (969) 228 14-88', style: TextStyle(color: Colors.white),),
+              //переправить на Image.network
+              leading: const Icon(Icons.account_box, color: Colors.white),
+              trailing:
+              IconButton(
+                icon: const Icon(Icons.arrow_right, color: Colors.white,),onPressed: () {}
+                ),
+                ),
+            ),
+      ]),
     );
   }
 }

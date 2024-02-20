@@ -50,12 +50,16 @@ class _HomePageState extends State<HomePage> {
   );
   AppBar appBar = AppBar(
     title: Text(title!),
+    leading: IconButton(icon: const Icon(Icons.exit_to_app, color: Colors.white,), onPressed: () {
+      Navigator.popAndPushNamed(context, '/');
+    },),
     actions: [IconButton(onPressed: (){
       setState(() {
         search = true;
       });
     }, icon: const Icon(Icons.search, color: Colors.white,)),
-    IconButton(onPressed: () {}, icon: const Icon(Icons.analytics_outlined, color: Colors.white,))],
+    //IconButton(onPressed: () {}, icon: const Icon(Icons.analytics_outlined, color: Colors.white,))
+    ],
   );
     return Scaffold(
       appBar: search? appBarsearch : appBar,
