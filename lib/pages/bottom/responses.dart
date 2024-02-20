@@ -5,8 +5,45 @@ class ResponsesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      child: Text('Отклики', style: TextStyle(color: Colors.white)),
+   return ListView(
+      children: [
+        Card(
+          child: Column(
+            children: [
+              Row( 
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Должность', style: TextStyle(color: Colors.white),),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.4,
+                  ),
+                  const Text('50 000 - 100 000', style: TextStyle(color: Colors.white),),
+                  const Divider(
+                    color: Colors.white,
+                  )
+                ],
+              ),
+              const Text('jgbcfybtlkgbcfybtlkjdlfksdlfkjsldkfjsldkfjsdfsdfssdfsdfsdfsdfsdfsfdfsdfjdlfksdlfkjsldkfjsldkfjsdfsdfssdfsdfsdfsdfsdfsfdfsdf', style: TextStyle(color: Colors.white),),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                const Text('Статус: отказ', style: TextStyle(color: Colors.white),),
+                SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.645,
+                  ),
+              ],),
+               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                const Text('Дата отклика', style: TextStyle(color: Colors.white),),
+                SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.638,
+                  ),
+              ],),
+            ],
+          )
+        )
+      ],
     );
   }
 }

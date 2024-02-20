@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_job/pages/bottom/profile.dart';
 import 'package:flutter_job/pages/bottom/responses.dart';
@@ -15,7 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String? title = "Вакансии";
   int index = 0;
-  bool Search = false;
+  bool search = false;
   final pages = [
     const VacancyPage(),
     const ResponsesPage(),
@@ -24,7 +22,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-      AppBar appBarSearch = AppBar(
+      AppBar appBarsearch = AppBar(
     title: const TextField(
       cursorColor: Colors.white,
       style: TextStyle(
@@ -45,7 +43,7 @@ class _HomePageState extends State<HomePage> {
     actions: [
       IconButton(onPressed: () {
         setState(() {
-          Search = false;
+          search = false;
         });
       }, icon: const Icon(Icons.cancel, color: Colors.white,))
     ],
@@ -54,12 +52,13 @@ class _HomePageState extends State<HomePage> {
     title: Text(title!),
     actions: [IconButton(onPressed: (){
       setState(() {
-        Search = true;
+        search = true;
       });
-    }, icon: const Icon(Icons.search, color: Colors.white,))],
+    }, icon: const Icon(Icons.search, color: Colors.white,)),
+    IconButton(onPressed: () {}, icon: const Icon(Icons.analytics_outlined, color: Colors.white,))],
   );
     return Scaffold(
-      appBar: Search? appBarSearch : appBar,
+      appBar: search? appBarsearch : appBar,
         body: pages.elementAt(index),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: index,
