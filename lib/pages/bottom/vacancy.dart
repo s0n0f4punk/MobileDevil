@@ -41,6 +41,7 @@ class VacancyPage extends StatelessWidget {
             ],
           )
         )
+        
       ],
     );
   }

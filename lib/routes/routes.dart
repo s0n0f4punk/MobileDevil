@@ -6,4 +6,5 @@ final routes = {
   '/': (context) => const AuthPage(),
   '/reg': (context) => const RegistrationPage(),
   '/home': (context) => const HomePage(),
+  '/auth':(context)=> const AuthPage(),
 };

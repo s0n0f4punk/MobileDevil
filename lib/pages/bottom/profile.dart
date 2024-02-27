@@ -28,7 +28,17 @@ class ProfilePage extends StatelessWidget {
                 ),
                 ),
             ),
-      ]),
+            const Text('Список резюме'),
+            ListView(
+              shrinkWrap: true,
+              children: const [ListTile(
+                tileColor: Colors.white,
+                subtitle: Text('Описание'),
+                title: Text('Программист'),
+              )],
+            )
+        ]              
+      ),
     );
   }
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "22689488757",
+    "project_id": "flutterjob-ebf02",
+    "storage_bucket": "flutterjob-ebf02.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22689488757:android:1a89d8e21bbb00aaf9fd3c",
+        "android_client_info": {
+          "package_name": "com.example.flutter_job"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCITDOtz7RURPjZjyoFAvtnZ0yx8oK_BP0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
