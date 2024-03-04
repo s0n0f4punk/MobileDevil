@@ -6,11 +6,14 @@ import 'package:flutter_job/themes/darkTheme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      options: FirebaseOptions(
-          apiKey: apiKey,
-          appId: appId,
-          messagingSenderId: messagingSenderId,
-          projectId: projectId));
+      options: const FirebaseOptions(
+          apiKey: "AIzaSyCITDOtz7RURPjZjyoFAvtnZ0yx8oK_BP0",
+          appId: "1:22689488757:android:1a89d8e21bbb00aaf9fd3c",
+          messagingSenderId: "22689488757",
+          projectId: "flutterjob-ebf02",
+          storageBucket: "flutterjob-ebf02.appspot.com",
+          )
+        );
   runApp(const ThemeAppMaterial());
 }
 
