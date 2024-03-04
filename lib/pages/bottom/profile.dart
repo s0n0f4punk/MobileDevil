@@ -48,7 +48,10 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               subtitle: Text(userDoc['phone'], style: const TextStyle(color: Colors.white),),
               //переправить на Image.network
-              leading: const Icon(Icons.account_box, color: Colors.white),
+              leading: userDoc['image'] == ''?CircleAvatar(
+                child: IconButton(onPressed: () {}, icon: const Icon(Icons.add),)
+              )
+              : CircleAvatar(backgroundImage: NetworkImage(userDoc['image']),),
               trailing:
               IconButton(
                 icon: const Icon(Icons.arrow_right, color: Colors.white,),onPressed: () {}
