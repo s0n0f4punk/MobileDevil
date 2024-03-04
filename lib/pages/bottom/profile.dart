@@ -1,25 +1,52 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
+final colRef = FirebaseFirestore.instance.collection('profiles');
+
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  String userId = FirebaseAuth.instance.currentUser!.uid.toString();
+  dynamic userDoc;
+
+  getUserById()async{
+    final DocumentSnapshot documentSnapshot = await colRef.doc(userId).get();
+    setState(() {
+      userDoc = documentSnapshot;
+    });
+  }
+ 
+  @override 
+  void initState() {
+    getUserById();
+    super.initState();
+  }
+
+  @override 
   Widget build(BuildContext context) {
+    // ignore: avoid_unnecessary_containers
     return Container(
       child: Column(
         children: [
           Card(
             child: ListTile(
-              title: Container(alignment: Alignment.topLeft,
-              child: const Column(
+              title: Container(
+                alignment: Alignment.topLeft,
+                child: Column(
                 children: [
-                  Text('Фамилиев', style: TextStyle(color: Colors.white),),
-                  Text('Имён', style: TextStyle(color: Colors.white),),
-                  Text('Отчествович', style: TextStyle(color: Colors.white),),
+                  Text(userDoc['surname'], style: const TextStyle(color: Colors.white),),
+                  Text(userDoc['name'], style: const TextStyle(color: Colors.white),),
+                  Text(userDoc['patronymic'], style: const TextStyle(color: Colors.white),),
                 ],
               ),
               ),
-              subtitle: const Text('+7 (969) 228 14-88', style: TextStyle(color: Colors.white),),
+              subtitle: Text(userDoc['phone'], style: const TextStyle(color: Colors.white),),
               //переправить на Image.network
               leading: const Icon(Icons.account_box, color: Colors.white),
               trailing:

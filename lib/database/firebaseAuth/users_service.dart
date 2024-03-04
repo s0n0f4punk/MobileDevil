@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_job/database/firebaseAuth/user.dart';
 
-class Authervice{
+class AuthService{
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   Future<UserModel?> signIn(String email,  String password)async{

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_job/database/firebaseAuth/users_service.dart';
 import 'package:flutter_job/pages/bottom/profile.dart';
 import 'package:flutter_job/pages/bottom/responses.dart';
 import 'package:flutter_job/pages/bottom/vacancy.dart';
@@ -11,6 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  AuthService authService = AuthService();
   String? title = "Вакансии";
   int index = 0;
   bool search = false;
@@ -50,10 +52,13 @@ class _HomePageState extends State<HomePage> {
   );
   AppBar appBar = AppBar(
     title: Text(title!),
-    leading: IconButton(icon: const Icon(Icons.exit_to_app, color: Colors.white,), onPressed: () {
+    leading: IconButton(icon: const Icon(Icons.exit_to_app, color: Colors.white,), onPressed: ()async {
+      await authService.logOut();
       Navigator.popAndPushNamed(context, '/');
     },),
-    actions: [IconButton(onPressed: (){
+    actions: [IconButton(onPressed: () {
+      
+
       setState(() {
         search = true;
       });

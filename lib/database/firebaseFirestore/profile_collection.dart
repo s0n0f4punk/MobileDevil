@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class ProfileCollection{
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
-  Future<void> addProfile(String id, String surname, String name, String patronymic, String phone, String email, String password)async{
+  Future<void> addProfile(String id, String surname, String name, String patronymic, String phone, String email, String password, String image)async{
     try {
       await _firebaseFirestore.collection("profiles").doc(id).set({
         'uid' : id,
@@ -12,7 +11,8 @@ class ProfileCollection{
         'patronymic' : patronymic,
         'phone' : phone,
         'email' : email,
-        'password' : password
+        'password' : password,
+        'image' : image
         });
     } catch (e) {
       return;
