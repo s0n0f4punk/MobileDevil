@@ -67,6 +67,15 @@ class _HomePageState extends State<HomePage> {
     ],
   );
     return Scaffold(
+      floatingActionButton: index==2
+      ? FloatingActionButton(
+        onPressed: () {},
+      child: const Icon(
+        Icons.add, 
+        color: Colors.white
+        ),
+      )
+      :null,
       appBar: search? appBarsearch : appBar,
         body: pages.elementAt(index),
         bottomNavigationBar: BottomNavigationBar(

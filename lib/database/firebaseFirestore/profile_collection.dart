@@ -18,6 +18,15 @@ class ProfileCollection{
       return;
     }
   }
+  Future <void> editImageProfile(dynamic docs, String image) async{
+    try {
+      await _firebaseFirestore.collection("profiles").doc(docs.id).update({
+        'image': image,
+      });
+    } catch (e) {
+      return;
+    }
+  }
 
   Future<void> editProfile(dynamic docs, String surname, String name, String patronymic, String phone)async{
     try {
