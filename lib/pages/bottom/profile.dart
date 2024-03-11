@@ -50,35 +50,45 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
  
-  Widget resumeCard(context, dynamic docs) {
-    return Card(
-      color: lightColor2,
-      child: ListTile(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(docs['position']),
-            Text(docs['salary']),
-
-          ],
-        ),
-          subtitle: Column(children: [
-            Text(docs['surname']),
-            Text(docs['name']),
-            Text(docs['patronymic']),
-            Text(docs['email']),
-            Text(docs['phone']),
-            const Expanded(child: Divider(
-              color: Colors.red,
-            )),
-            Text(docs['description']),
-            Container(
-              alignment: Alignment.bottomRight,
-              child: Text(docs['date']),
+  Widget resumeCard(BuildContext context, dynamic docs) {
+    return SizedBox(
+      child: Card(
+        color: lightColor2,
+        child: ListTile(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(docs['position'], style: const TextStyle(color: Colors.white, fontSize: 18),),
+              Text(docs['salary'] + ' RUB', style: const TextStyle(color: Colors.white, fontSize: 18),),
+            ],
+          ),
+            subtitle: Column(children: [
+              Text(docs['surname'] + ' ' + docs['name'] + ' ' + docs['patronymic'], style: const TextStyle(color: Colors.white),),
+              Text('Почта: ${docs['email']}', style: const TextStyle(color: Colors.white),),
+              Text('Телефон: ${docs['phone']}', style: const TextStyle(color: Colors.white),),
+              const SizedBox( child: 
+                Expanded(child: Divider(
+                color: Colors.red,
+              )),),
+              Text("Обо мне: ${docs['description']}", style: const TextStyle(color: Colors.white),),
+              const SizedBox( child: 
+                Expanded(child: Divider(
+                color: Colors.red,
+              )),),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(docs['date'], style: const TextStyle(color: Colors.white),),
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.edit, color: Colors.white)
+                    )
+                  ] 
+                )
+              ],
             )
-          ],
         ),
-      )
+      ),
     );
   }
 
@@ -92,7 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     ToastContext().init(context);
     // ignore: avoid_unnecessary_containers
-    return Container(
+    return Expanded(
       child: Column(
         children: [
           Card(
@@ -137,9 +147,15 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: CircularProgressIndicator(),
                 );
               } else {
-                return ListView.builder(itemCount: snapshot.data!.docs.length, itemBuilder:(context,index) {
-                  return resumeCard(context, snapshot.data!.docs[index]);
-                },);
+                return ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: snapshot.data!.docs.length,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder:(context,index) {
+                    return resumeCard(context, snapshot.data!.docs[index]);
+                  },
+                );
               }
             }) 
               ],
