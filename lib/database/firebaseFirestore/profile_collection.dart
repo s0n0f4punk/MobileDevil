@@ -22,7 +22,7 @@ class ProfileCollection{
     try {
       await _firebaseFirestore.collection("profiles").doc(docs.id).update({
         'image': image,
-      });
+      });print('');
     } catch (e) {
       return;
     }

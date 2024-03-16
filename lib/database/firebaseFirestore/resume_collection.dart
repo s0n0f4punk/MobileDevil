@@ -28,4 +28,19 @@ class ResumeCollection{
       return;
     }
   } 
+  Future<void> editResume(String position, String salary, String description, dynamic docs ) async {
+    try {
+      final DateTime now = DateTime.now();
+      final DateFormat dateFormat = DateFormat('dd-MM-yyyy');
+      final String formated = dateFormat.format(now);
+      await _firebaseFirestore.collection('profiles').doc(user).collection('resumes').doc().update({
+        'position' :  position,
+        'salary' : salary,
+        'description' : description,
+        'date' : formated,
+    });
+    } catch (e) {
+      return;
+    }
+  }
 }

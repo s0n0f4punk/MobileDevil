@@ -80,7 +80,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   Text(docs['date'], style: const TextStyle(color: Colors.white),),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.popAndPushNamed(context, '/add_resumes');
+                      },
                       icon: const Icon(Icons.edit, color: Colors.white)
                     )
                   ] 
@@ -102,7 +104,8 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     ToastContext().init(context);
     // ignore: avoid_unnecessary_containers
-    return Expanded(
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
           Card(

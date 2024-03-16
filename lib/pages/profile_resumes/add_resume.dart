@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_job/database/firebaseFirestore/resume_collection.dart';
 import 'package:flutter_job/pages/bottom/profile.dart';
+import 'package:toast/toast.dart';
 
 class addResumesPage extends StatefulWidget {
   const addResumesPage({super.key});
@@ -17,6 +19,7 @@ class _AddResumesPageState extends State<addResumesPage> {
   TextEditingController descriptionController = TextEditingController();
   final String userId = FirebaseAuth.instance.currentUser!.uid.toString();
   dynamic userDoc;
+  ResumeCollection resumeCollection = ResumeCollection();
 
 
   getUserById()async{
@@ -34,6 +37,7 @@ class _AddResumesPageState extends State<addResumesPage> {
   
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(onPressed: () => Navigator.popAndPushNamed(context, '/home'), icon:const Icon(Icons.arrow_left, color: Colors.white)), 
@@ -133,7 +137,17 @@ class _AddResumesPageState extends State<addResumesPage> {
               height: MediaQuery.of(context).size.height *0.06,
               width: MediaQuery.of(context).size.width *0.6,
               child: ElevatedButton(
-                onPressed: () async {},
+                onPressed: () async {
+                  if (salaryController.text.isEmpty || descriptionController.text.isEmpty || positionController.text.isEmpty) {
+                    Toast.show('Заполните все поля!');
+                  } else {
+                    showDialog(context: context, builder: (context)=>const Center(child: CircularProgressIndicator(),));
+                    await resumeCollection.addResumeProfile(positionController.text, salaryController.text, descriptionController.text, userDoc);
+                    Navigator.pop(context);
+                    Toast.show("Успешно добавлено!");
+                    Navigator.popAndPushNamed(context, '/home');
+                  }
+                },
                 child: const Text("Добавить", style: TextStyle(color: Colors.white),),
               ),
             )
