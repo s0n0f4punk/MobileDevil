@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_job/database/firebaseFirestore/profile_collection.dart';
+import 'package:flutter_job/database/firebaseFirestore/resume_collection.dart';
 import 'package:flutter_job/database/firebaseStorage/image_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:toast/toast.dart';
@@ -28,6 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
   XFile? fileName;
   ImageStorage imageStorage = ImageStorage();
   ProfileCollection profileCollection = ProfileCollection();
+  ResumeCollection resumeCollection = ResumeCollection();
 
   selectImageGallery()async {
     final returnImage = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -81,10 +83,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   Text(docs['date'], style: const TextStyle(color: Colors.white),),
                   IconButton(
                       onPressed: () {
-                        Navigator.popAndPushNamed(context, '/add_resumes');
+                        Navigator.popAndPushNamed(context, '/add_resumes', arguments: docs);
                       },
                       icon: const Icon(Icons.edit, color: Colors.white)
-                    )
+                    ),
+                    IconButton(onPressed: ()async {
+                      await resumeCollection.deleteResume(docs);
+                    }, icon: const Icon(Icons.delete, color: Colors.red,))
                   ] 
                 )
               ],

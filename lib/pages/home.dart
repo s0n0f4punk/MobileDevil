@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       floatingActionButton: index==2
       ? FloatingActionButton(
-        onPressed: () => Navigator.popAndPushNamed(context, '/add_resumes'),
+        onPressed: () => Navigator.popAndPushNamed(context, '/add_resumes', arguments: null),
       child: const Icon(
         Icons.add, 
         color: Colors.white

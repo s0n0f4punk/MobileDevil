@@ -20,6 +20,7 @@ class _AddResumesPageState extends State<addResumesPage> {
   final String userId = FirebaseAuth.instance.currentUser!.uid.toString();
   dynamic userDoc;
   ResumeCollection resumeCollection = ResumeCollection();
+  dynamic resumeDoc;
 
 
   getUserById()async{
@@ -37,7 +38,31 @@ class _AddResumesPageState extends State<addResumesPage> {
   
   @override
   Widget build(BuildContext context) {
-    ToastContext().init(context);
+    resumeDoc = ModalRoute.of(context)?.settings.arguments as dynamic;
+    positionController.text = resumeDoc['position'];
+    salaryController.text = resumeDoc['salary'];
+    descriptionController.text = resumeDoc['description'];
+
+    Future<void> addResumes() async {
+      if (salaryController.text.isEmpty || descriptionController.text.isEmpty || positionController.text.isEmpty) {
+        Toast.show('Заполните все поля!');
+        } else {
+        showDialog(context: context, builder: (context)=>const Center(child: CircularProgressIndicator(),));
+        await resumeCollection.addResumeProfile(positionController.text, salaryController.text, descriptionController.text, userDoc);
+        Navigator.pop(context);
+        Toast.show("Успешно добавлено!");
+        Navigator.popAndPushNamed(context, '/home');
+        }
+    }
+
+Future<void> editResumes() async {
+  showDialog(context: context, builder: (context) => const Center(child: CircularProgressIndicator(),));
+  await resumeCollection.editResume(positionController.text, salaryController.text, descriptionController.text, resumeDoc);
+   Navigator.pop(context);
+        Toast.show("Успешно изменено!");
+        Navigator.popAndPushNamed(context, '/home');
+}
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(onPressed: () => Navigator.popAndPushNamed(context, '/home'), icon:const Icon(Icons.arrow_left, color: Colors.white)), 
@@ -137,18 +162,8 @@ class _AddResumesPageState extends State<addResumesPage> {
               height: MediaQuery.of(context).size.height *0.06,
               width: MediaQuery.of(context).size.width *0.6,
               child: ElevatedButton(
-                onPressed: () async {
-                  if (salaryController.text.isEmpty || descriptionController.text.isEmpty || positionController.text.isEmpty) {
-                    Toast.show('Заполните все поля!');
-                  } else {
-                    showDialog(context: context, builder: (context)=>const Center(child: CircularProgressIndicator(),));
-                    await resumeCollection.addResumeProfile(positionController.text, salaryController.text, descriptionController.text, userDoc);
-                    Navigator.pop(context);
-                    Toast.show("Успешно добавлено!");
-                    Navigator.popAndPushNamed(context, '/home');
-                  }
-                },
-                child: const Text("Добавить", style: TextStyle(color: Colors.white),),
+                onPressed: () async => resumeDoc==null?addResumes():editResumes(),
+                child: resumeDoc==null? const Text("Добавить", style: TextStyle(color: Colors.white),):const Text("Изменить", style: TextStyle(color: Colors.white),)
               ),
             )
           ],
